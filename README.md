@@ -10,3 +10,12 @@
 
 ### Makefile
 > Take a look at this as it has a good bit of code that relates to how the tests start and are run
+
+
+# Getting started
+
+## Start App
+Run the command `sails lift`
+
+## Testing
+Run the command `make test`
