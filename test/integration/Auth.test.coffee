@@ -49,7 +49,6 @@ describe "Auth", ->
           .expect(200)
           .end (err, res) ->
             if err then done(err)
-            sails.log res
             assert.ok res.body
             assert.ok res.body.id
             assert.equal res.body.username, user.username
