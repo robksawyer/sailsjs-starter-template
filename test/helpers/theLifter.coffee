@@ -12,7 +12,8 @@ sailsprocess = undefined
 
 #loginHelper = require('./login'),
 clear = require("cli-clear")
-global.fixtures = `undefined`
+global.fixtures = undefined
+
 theLifter =
 
   # Starts the Sails server, or if already started, stops and then starts it
@@ -64,18 +65,18 @@ theLifter =
         sailsprocess = app
 
         # Populate the DB
-        barrels.populate [ "user" ], ((err) ->
+        barrels.populate [ "passport", "user" ], ((err) ->
           if err
             sails.log.error err
             return next(err)
-          sails.log "--- Populated the database. ---"
 
+          sails.log "--- Populated the database. ---"
           # Save original objects in `fixtures` variable and return it to the callback
           global.fixtures = barrels.data
-          cb global.fixtures  if cb
-        ), false
 
-      next()
+          next()
+
+        ), false
 
     , (next) ->
       #loginHelper.init(next);

@@ -23,7 +23,7 @@ describe "Barrels", ->
     describe "populate(cb)", ->
       it "should populate the DB with users", (done) ->
         User.find().exec (err, users) ->
-          return done(err)  if err
+          if err then done(err)
           gotUsers = (global.fixtures["user"].length > 0)
           usersAreInTheDb = (users.length is global.fixtures["user"].length)
           expect(gotUsers and usersAreInTheDb).be.ok

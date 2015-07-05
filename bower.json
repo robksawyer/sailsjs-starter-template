@@ -1,0 +1,26 @@
+{
+  "name": "sailsjs-starter-template",
+  "version": "0.0.1",
+  "authors": [
+    "Rob Sawyer <robksawyer@gmail.com>"
+  ],
+  "description": "A starter template for SailsJS.",
+  "main": "app.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.0.3",
+    "fontawesome": "~4.3.0",
+    "moment": "~2.10.3",
+    "rsvp": "~3.0.18",
+    "angular": "~1.4.0",
+    "toastr": "~2.1.1",
+    "lodash": "~3.9.3"
+  }
+}

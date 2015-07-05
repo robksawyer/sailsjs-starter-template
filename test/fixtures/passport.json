@@ -1,0 +1,27 @@
+[
+  {
+    "protocol": "local",
+    "password": "thepassthepass1",
+    "user": 1
+  },
+  {
+    "protocol": "local",
+    "password": "thepassthepass2",
+    "user": 2
+  },
+  {
+    "protocol": "local",
+    "password": "thepassthepass3",
+    "user": 3
+  },
+  {
+    "protocol": "local",
+    "password": "thepassthepass4",
+    "user": 4
+  },
+  {
+    "protocol": "local",
+    "password": "thepassthepass5",
+    "user": 5
+  }
+]
