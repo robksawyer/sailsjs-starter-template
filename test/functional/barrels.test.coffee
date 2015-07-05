@@ -1,0 +1,140 @@
+###
+Dependencies
+###
+chai = require("chai")
+expect = chai.expect
+should = chai.should()
+assert = chai.assert
+async = require("async")
+
+describe "Barrels", ->
+
+  # Load fixtures into memory
+  describe "constructor", ->
+    it "should load all the json files from default folder", ->
+      Object.keys(global.fixtures).length.should.be.greaterThan 0, "At least one fixture files should be loaded!"
+
+    it "should set generate lowercase property names for models", ->
+      oneWord = Object.keys(global.fixtures).join()
+      oneWord.toLowerCase().should.be.eql oneWord, "Property names should be in lowercase!"
+
+  # Populate DB with fixtures
+  describe "populate()", ->
+    describe "populate(cb)", ->
+      it "should populate the DB with users", (done) ->
+        User.find().exec (err, users) ->
+          return done(err)  if err
+          gotUsers = (global.fixtures["user"].length > 0)
+          usersAreInTheDb = (users.length is global.fixtures["user"].length)
+          expect(gotUsers and usersAreInTheDb).be.ok
+          done()
+
+# it('should populate the DB with posts and comments', function(done) {
+#   Post.find().exec(function(err, posts) {
+#     if (err)
+#       return done(err);
+#
+#     var gotPosts = (global.fixtures['post'].length > 0);
+#     var postsAreInTheDb = (posts.length === global.fixtures['post'].length);
+#     expect(gotPosts && postsAreInTheDb).be.ok;
+#
+#     Comment
+#       .find()
+#       .populate('post')
+#       .exec(function(err, comments) {
+#         if (err)
+#           return done(err);
+#
+#         posts.length.should.be.below(comments.length,
+#           'Posts and comments should have equal amount of entries!'
+#         );
+#         done();
+#       });
+#     });
+# });
+
+# it('should assign a secret to each post', function(done) {
+#   Secret
+#     .find()
+#     .populate('post')
+#     .exec(function(err, secrets) {
+#       if (err)
+#         return done(err);
+#
+#       async.each(secrets, function(secret, nextPost) {
+#         expect(secret.post.body).not.be.empty;
+#
+#         nextPost();
+#       }, done);
+#     });
+# });
+
+# it('should assign two comments to the first post', function(done) {
+#   Post
+#     .findOne()
+#     .where({id: 1})
+#     .populate('comments')
+#     .exec(function(err, post) {
+#       if (err)
+#         return done(err);
+#
+#       expect(post.body).not.be.empty;
+#       expect(post.comments.length).be.greaterThan(3);
+#
+#       done();
+#     });
+# });
+
+#describe('populate(cb, false)', function() {
+#      before(function(done) {
+#        barrels.populate(done, false);
+#      });
+#
+#      it('should keep the associations-related fields', function(done) {
+#        Comment.find().exec(function(err, comments) {
+#          if (err)
+#            return done(err);
+#
+#          async.each(comments, function(product, nextProduct) {
+#            product.category.should.be.a.Number;
+#            product.tags.should.be.an.Array;
+#
+#            nextProduct();
+#          }, done);
+#        });
+#      });
+#    });
+
+#describe('populate(modelList, cb)', function() {
+#      before(function(done) {
+#        Comment.destroy().exec(function(err) {
+#          if (err)
+#            return done(err);
+#
+#          Post.destroy().exec(function(err) {
+#            if (err)
+#              return done(err);
+#
+#            barrels.populate(['comments', 'tags'], done);
+#          });
+#        });
+#      });
+#
+#      it('should populate comments but not posts', function(done) {
+#        Comment.find().exec(function(err, comments) {
+#          if (err)
+#            return done(err);
+#
+#          comments.length.should.be.greaterThan(1);
+#        });
+#
+#        Post.find().exec(function(err, posts) {
+#          if (err)
+#            return done(err);
+#
+#          posts.length.should.be.eql(0);
+#        });
+#
+#        done();
+#      });
+#    });
