@@ -28,6 +28,13 @@ module.exports.policies = {
 
   // '*': true,
 
+  //https://github.com/kasperisager/sails-generate-auth
+  '*': ['passport', 'sessionAuth', 'flash'],
+
+  'auth': {
+		'*': ['passport']
+	}
+
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *

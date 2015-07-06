@@ -47,6 +47,8 @@ theLifter =
         connections:
           test:
             adapter: "sails-disk"
+        hooks:
+          grunt: false
         models:
           # Use in-memory database for tests
           connection: "test"
