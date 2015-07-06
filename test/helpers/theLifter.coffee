@@ -100,8 +100,8 @@ theLifter =
   #
   lower: (next) ->
     "use strict"
-    sailsprocess.log.warn "Lowering sails..."
-    sailsprocess.lower (err) ->
+    global.sails.log.warn "Lowering sails..."
+    global.sails.lower (err) ->
       lifted = false
       next err
 
