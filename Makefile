@@ -21,7 +21,7 @@ base:
 	@NODE_ENV=test/bootstrap.test.*,test $(MOCHA) \
 	--debug \
 	--recursive \
-	--require chai \
+	--require coffee-script/register \
 	--timeout 60000 \
 	--colors \
 	--reporter spec \

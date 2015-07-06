@@ -8,7 +8,7 @@ SailsApp = require("sails").Sails
 async = require("async")
 lifted = false
 Barrels = require("barrels")
-sailsprocess = undefined
+global.sails = undefined
 
 #loginHelper = require('./login'),
 clear = require("cli-clear")
@@ -32,14 +32,14 @@ theLifter =
       if lifted
         #Clear the terminal window
         clear()
-        return theLifter.lower(next)
+        theLifter.lower(next)
       next()
 
     # Start the Sails server
     , (next) ->
-      sailsprocess = new SailsApp()
-      sailsprocess.log.warn "Lifting sails..."
-      sailsprocess.log "Loading models from " + require("path").join(process.cwd(), "test/fixtures/models")
+      global.sails = new SailsApp()
+      global.sails.log.warn "Lifting sails..."
+      global.sails.log "Loading models from " + require("path").join(process.cwd(), "test/fixtures/models")
       sailsLiftSettings =
         port: 1335
         log:
@@ -55,22 +55,22 @@ theLifter =
           migrate: "drop"
         liftTimeout: 10000
 
-      sailsprocess.lift sailsLiftSettings, (err, app) ->
+      global.sails.lift sailsLiftSettings, (err, app) ->
         if err
           sails.log.error err
-          return next(err)
+          next(err)
 
         # Load fixtures
         barrels = new Barrels()
         lifted = true
         global.sails = app
-        sailsprocess = app
+        global.sails = app
 
         # Populate the DB
         barrels.populate [ "passport", "user" ], ((err) ->
           if err
             sails.log.error err
-            return next(err)
+            next(err)
 
           sails.log "--- Populated the database. ---"
           # Save original objects in `fixtures` variable and return it to the callback
@@ -96,8 +96,8 @@ theLifter =
   #
   lower: (next) ->
     "use strict"
-    sailsprocess.log.warn "Lowering sails..."
-    sailsprocess.lower (err) ->
+    global.sails.log.warn "Lowering sails..."
+    global.sails.lower (err) ->
       lifted = false
       next err
 
