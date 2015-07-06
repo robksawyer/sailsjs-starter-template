@@ -2,16 +2,16 @@ REPORTER = spec
 MOCHA = ./node_modules/.bin/mocha
 SAILS = ./node_modules/.bin/sails
 JSHINT = ./node_modules/.bin/jshint
-COFFEEJSHINT = ./node_modules/.bin/coffee-jshint
+COFFEELINT = ./node_modules/.bin/coffeelint
 ISTANBUL = ./node_modules/.bin/istanbul
 TESTAPP = _testapp
 
-COFFEEJSHINT_GLOBALS = sails,describe,it,after,before,beforeEach,afterEach,User,Passport
+COFFEELINT_GLOBALS = sails,describe,it,after,before,beforeEach,afterEach,User,Passport
 
 ifeq (true,$(COVERAGE))
-test: coffeejshint coverage
+test: coffeelint coverage
 else
-test: coffeejshint base clean
+test: coffeelint base clean
 endif
 
 base:
@@ -48,11 +48,11 @@ jshint:
 	@echo "+------------------------------------+"
 	$(JSHINT) test
 
-coffeejshint:
+coffeelint:
 	@echo "+-------------------------------------------+"
 	@echo "| Running coffee linter                     |"
 	@echo "+-------------------------------------------+"
-	$(COFFEEJSHINT) -o node --globals $(COFFEEJSHINT_GLOBALS) test/*.coffee test/**/*.coffee
+	$(COFFEELINT) -o node --globals $(COFFEELINT_GLOBALS) test/*.coffee test/**/*.coffee
 
 clean:
 	@echo "+------------------------------------+"
